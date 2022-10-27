@@ -27,7 +27,7 @@ export default function Home() {
         <Main {...Item} key={Item.title}/>
       )}
       </Row>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
