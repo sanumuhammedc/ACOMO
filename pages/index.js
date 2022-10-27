@@ -1,5 +1,5 @@
-// import Head from 'next/head'
 // import Image from 'next/image'
+import Head from 'next/head'
 import Carousel from '../Components/Carousel'
 import Footer from '../Components/Footer'
 import Main from '../Components/Main'
@@ -9,6 +9,9 @@ import styles from '../styles/Home.module.css'
 export default function Home() {
   return (
     <div className={styles.container}>
+      <Head>
+        <title>ACOMO</title>
+      </Head>
     <Navbar/>
     <Carousel/>
     <Main/>
