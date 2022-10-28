@@ -1,14 +1,14 @@
 ![image](https://user-images.githubusercontent.com/92361680/197824476-464d420d-26a6-4df5-aef3-99214fac1388.png)
 
 
-# {Project Name} - Make a Ton 5.0
-Tell us about your project here
+# {ACCOMO} - Make a Ton 5.0
+A website to guide you to the best available hostels, pg houses, messes and restaurants around the campus. 
 
 ## Team Members
-[1.Team Member 1](enter_github_id_here)   
-[2.Team Member 2](enter_github_id_here)   
-[3.Team Member 3](enter_github_id_here)   
-[4.Team Member 4](enter_github_id_here)   
+[1.SANU MUHAMMED C](https://github.com/sanumuhammedc)   
+[2.SHAS](https://github.com/shazhussan)   
+[3.NIHAL VADAKKAN](https://github.com/nvadakkan20)   
+[4.ARSHAD AT](https://github.com/ArshadAchuthodika)   
 
 ## Link to Project
 [Embed the live link of project](live_link)
@@ -18,13 +18,14 @@ Explaining the working of project
 Embed video of project demo
 
 ## Technologies used
-List out tech stacks you have used
+nextjs, firebase, react bootstrap, material UI.
 
 ## How to configure
-Instructions for setting up project
+1. Clone the project repository
+2. npm install
 
 ## How to Run
-Instructions for running
+nmp run dev
 
 ## Other Links
-Provide any other links ( for eg. Wireframe , UI )
+UI-(https://www.figma.com/file/2Tm6J24SqxvrYerEFUrKBm/Accomo?node-id=0%3A1)
