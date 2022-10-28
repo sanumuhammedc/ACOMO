@@ -20,40 +20,41 @@ export default function HostelImages() {
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
   const tiers = [
     {
-      title: 'Free',
-      price: '0',
+      title: 'Single Room',
+      price: '5000',
       description: [
-        '10 users included',
-        '2 GB of storage',
-        'Help center access',
-        'Email support',
+        'Attached Bathroom',
+        'A/C Room',
+        'Electricity And Water included',
+        'Mess Available',
       ],
-      buttonText: 'Sign up for free',
+      buttonText: 'Book Now',
       buttonVariant: 'outlined',
     },
     {
-      title: 'Pro',
+      title: 'Double Room',
       subheader: 'Most popular',
-      price: '15',
+      price: '3500',
       description: [
-        '20 users included',
-        '10 GB of storage',
-        'Help center access',
-        'Priority email support',
+        'Attached Bathroom',
+        'Free Wifi',
+        'Seperate bed',
+        'Shelf Available',
       ],
-      buttonText: 'Get started',
+      buttonText: 'Boook Now',
       buttonVariant: 'contained',
     },
     {
-      title: 'Enterprise',
-      price: '30',
+      title: 'Triple Room',
+      price: '2800',
       description: [
-        '50 users included',
-        '30 GB of storage',
-        'Help center access',
-        'Phone & email support',
+        'free Wifi',
+        '24/7 Hot water',
+        'Medical Help',
+        'Mess on Request',
+        'CCTV Survilance',
       ],
-      buttonText: 'Contact us',
+      buttonText: 'Book Now',
       buttonVariant: 'outlined',
     },
   ];
@@ -68,7 +69,7 @@ export default function HostelImages() {
     setViewerIsOpen(false);
   };
   return (
-    <div>
+    <div style={{marginBottom: "2rem"}}>
 
      <Gallery photos={photos} onClick={openLightbox} />
       <ModalGateway>
@@ -103,9 +104,8 @@ export default function HostelImages() {
             Usmans Hostel
           </Typography>
           <Typography variant="h5" align="center" color="text.secondary" paragraph>
-            Something short and leading about the collection below—its contents,
-            the creator, etc. Make it short and sweet, but not too short so folks
-            don&apos;t simply skip over it entirely.
+          South Kalamassery, Kalamassery, Ernakulam, Kerala 682022<br/> 
+          Phone: 99951 15025
           </Typography>
           <Stack
             sx={{ pt: 4 }}
@@ -114,8 +114,8 @@ export default function HostelImages() {
             justifyContent="center"
           >
             
-            <Button variant="contained">Main call to action</Button>
-            <Button variant="outlined">Secondary action</Button>
+            <Button href="/pool" variant="contained">Request Companion</Button>
+            <Button href="/poollist" variant="outlined">Search Companion</Button>
           </Stack>
         </Container>
       </Box>
@@ -156,7 +156,7 @@ export default function HostelImages() {
                     }}
                   >
                     <Typography component="h2" variant="h3" color="text.primary">
-                      ${tier.price}
+                    ₹{tier.price}
                     </Typography>
                     <Typography variant="h6" color="text.secondary">
                       /mo
@@ -176,7 +176,7 @@ export default function HostelImages() {
                   </ul>
                 </CardContent>
                 <CardActions>
-                  <Button fullWidth variant={tier.buttonVariant}>
+                  <Button href="/bookhostel" fullWidth variant={tier.buttonVariant}>
                     {tier.buttonText}
                   </Button>
                 </CardActions>
