@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <footer class="footer-section">
+    <footer className="footer-section">
 		<div style={{ background: "#2099d12a", padding: "5px 0", transition: "0.5s"}} >
 			<div className="container">
 				<div className="row">
