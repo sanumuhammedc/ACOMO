@@ -11,7 +11,7 @@ A website to guide you to the best available hostels, pg houses, messes and rest
 [4.ARSHAD AT](https://github.com/ArshadAchuthodika)   
 
 ## Link to Project
-[Embed the live link of project](live_link)
+[Embed the live link of project](https://accomo.vercel.app/)
 
 ## How it Works ?
 Explaining the working of project  
