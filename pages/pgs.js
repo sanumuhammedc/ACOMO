@@ -1,11 +1,15 @@
-import MenuList from "../Components/HostelList";
-import Badge from 'react-bootstrap/Badge';
+import PgList from "../Components/PgList";
+import SectionNav from "../Components/SectionNav";
+import Head from "next/head";
 
 export default function pgs() {
   return (
-    <div className="p-4">
-      <h1><Badge bg="secondary">Paying Guest</Badge></h1>
-      {/* <MenuList /> */}
-    </div>
+    <>
+    <Head>
+        <title>ACCOMO | PG&apos;S</title>
+      </Head>
+      <SectionNav title="PG's" link="/pgs" />
+      <PgList />
+    </>
   );
 }

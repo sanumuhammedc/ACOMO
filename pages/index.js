@@ -9,10 +9,10 @@ import Navbar from "../Components/Navigation";
 import Row from 'react-bootstrap/Row';
 
 
-const List = [{title:"Hostel",content:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, voluptatem?",link: "/hostels"}, 
-              {title:"Paying Guest",content:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, voluptatem?",link: "/pgs" }, 
-              {title:"Mess",content:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, voluptatem?",link: "/mess" },
-              {title:"Restaurants",content:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, voluptatem?", link: "/restaurants" }]
+const List = [{title:"Hostel",content:"Search For Hostels Near You, get rooms at afordable rate. Find room mate fit to you",link: "/hostels"}, 
+              {title:"Paying Guest",content:"Search For PG's Near You, get rooms at afordable rate. Find room mate fit to you",link: "/pgs" }, 
+              {title:"Mess",content:"Search For Mess Near You, get Food at afordable rate. Eat healthy food",link: "/mess" },
+              {title:"Restaurants",content:"Want't to try new reciepies, Browse the restaurants suggested by our users", link: "/restaurants" }]
 
 export default function Home() {
   return (

@@ -87,6 +87,7 @@ export default function signin() {
             <Button
               type="submit"
               fullWidth
+              href='/'
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >

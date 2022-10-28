@@ -1,11 +1,15 @@
-import MenuList from "../Components/HostelList";
-import Badge from 'react-bootstrap/Badge';
+import RestaurantsList from "../Components/RestaurantsList";
+import SectionNav from "../Components/SectionNav";
+import Head from "next/head";
 
 export default function restaurants() {
   return (
-    <div className="p-4">
-      <h1><Badge bg="secondary">Restaurants</Badge></h1>
-      {/* <MenuList /> */}
-    </div>
+    <>
+    <Head>
+        <title>ACCOMO | RESTAURANTS</title>
+      </Head>
+      <SectionNav title="RESTAURANTS" link="/restaurants" />
+      <RestaurantsList />
+    </>
   );
 }
