@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>ACOMO</title>
+        <title>ACCOMO</title>
       </Head>
       <Navbar style={{position: "sticky"}} />
       <Slider />
