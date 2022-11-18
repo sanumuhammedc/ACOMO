@@ -1,37 +1,24 @@
-![image](https://user-images.githubusercontent.com/92361680/197824476-464d420d-26a6-4df5-aef3-99214fac1388.png)
+Welcome to the NextJS base template bootstrapped using the `create-next-app`. This template supports TypeScript, but you can use normal JavaScript as well.
 
+## Getting Started
 
-# {ACCOMO} - Make a Ton 5.0
-A website to guide you to the best available hostels, pg houses, messes and restaurants around the campus. 
+Hit the run button to start the development server.
 
-## Team Members
-[1.SANU MUHAMMED C](https://github.com/sanumuhammedc)   
-[2.SHAS](https://github.com/shazhussan)   
-[3.NIHAL VADAKKAN](https://github.com/nvadakkan20)   
-[4.ARSHAD AT](https://github.com/ArshadAchuthodika)   
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-## Link to Project
-[Embed the live link of project](https://accomo.vercel.app/)
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on `/api/hello`. This endpoint can be edited in `pages/api/hello.ts`.
 
-## How it Works ?
-Most of the first years stepping into the campus are clueless of where to lock their hostels and with whom.
-CUSAT University hostels provide hostel rooms just for around 3 by 5 of the students in School of Engineering. This forces the students to try private hostels in or outside the campus. Being beginners in the city, it’s being a hectic task for them to find a room partner for them and a better hostel space.
-Freshers also face problems in selecting an appropriate food mess or to find good restaurants in the campus surroundings..
-Parents worried, no idea regarding the food and accommodation available in the campus, struggles to get some seniors contacts and ask them, no guarantee if the senior knows about the place well.
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-[Video of project demo](https://www.loom.com/share/8b038e592af144c1a451775176875672)
+## Learn More
 
-[SLIDES OF PROJECT](https://drive.google.com/file/d/153ur8OcnEE82_uDL7OrSa8wMJ_yobijC/view?usp=sharing)
+To learn more about Next.js, take a look at the following resources:
 
-## Technologies used
-nextjs, firebase, react bootstrap, material UI.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## How to configure
-1. Clone the project repository
-2. npm install
+## Productionizing your Next App
 
-## How to Run
-nmp run dev
+To make your next App run smoothly in production make sure to [turn this repl to an always-on repl.](https://docs.replit.com/hosting/enabling-always-on)
 
-## Other Links
-UI-(https://www.figma.com/file/2Tm6J24SqxvrYerEFUrKBm/Accomo?node-id=0%3A1)
+You can also produce a production build by running `npm run build` and [changing the run command](https://docs.replit.com/programming-ide/configuring-repl#run) to `npm run start`.
