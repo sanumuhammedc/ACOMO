@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 
 import PromptCard from "./PromptCard";
+import HostelCard from "./HostelCard";
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
