@@ -80,6 +80,7 @@ const HostelDetailPage = () => {
             </div>
 
             <div className="mb-4">
+                <h2 className="font-semibold mb-2">Selected Room Details</h2>
                 <p>{selectedRoomType.type}</p>
                 <p>Price: ${selectedRoomType.price}</p>
                 <p>{selectedRoomType.description}</p>
