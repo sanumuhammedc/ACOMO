@@ -2,6 +2,9 @@
 import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { FiWifi, FiDroplet, FiMapPin, FiPhone, FiMail, FiClock } from 'react-icons/fi';
+import { MdElectricalServices, MdPayment, MdCleaningServices, MdOutlineLocalParking } from 'react-icons/md';
+import { RiHotelLine } from 'react-icons/ri';
 
 
 const HostelDetailPage = () => {
@@ -42,8 +45,8 @@ const HostelDetailPage = () => {
 
     return (
         <div>
-            <h1 className="text-3xl font-semibold mb-2">{sampleHostelData.name}</h1>
-            <p className="text-gray-600 mb-4">{sampleHostelData.location}</p>
+            <h1 className="text-3xl font-semibold text-blue-500 mb-2">{sampleHostelData.name}</h1>
+            <p className="text-gray-600 mb-4 flex items-center"> <FiMapPin className='mr-1'/> {sampleHostelData.location}</p>
 
             {/* Image Gallery */}
             <div className="mb-4">
@@ -64,13 +67,13 @@ const HostelDetailPage = () => {
 
             {/* Room Types */}
             <div className="mb-4">
-                <h2 className="text-xl font-semibold mb-2">Room Types</h2>
-                <div className="flex flex-col">
+                <h2 className="text-xl font-semibold text-blue-500 mb-2">Room Types</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {sampleHostelData.roomTypes.map((roomType) => (
                         <button
                             key={roomType.type}
                             onClick={() => handleRoomTypeChange(roomType)}
-                            className={`py-2 mb-2 w-30 px-4 border ${selectedRoomType.type === roomType.type ? 'bg-black text-white' : 'bg-gray-200'
+                            className={`py-2 mb-2 w-full md:w-30 px-4 border ${selectedRoomType.type === roomType.type ? 'black_btn' : 'outline_btn'
                                 }`}
                         >
                             {roomType.type}
@@ -79,46 +82,86 @@ const HostelDetailPage = () => {
                 </div>
             </div>
 
+            {/* Selected Room Type */}
             <div className="mb-4">
-                <h2 className="font-semibold mb-2">Selected Room Details</h2>
-                <p>{selectedRoomType.type}</p>
-                <p>Price: ${selectedRoomType.price}</p>
+                <h2 className="text-xl font-semibold text-blue-500 mb-2">Selected Room Details</h2>
+                <p className="text-lg font-medium">{selectedRoomType.type}</p>
+                <p className="text-gray-600 mb-2">Price: ₹{selectedRoomType.price} / Person</p>
                 <p>{selectedRoomType.description}</p>
             </div>
 
             {/* Additional Hostel Information */}
             <div className="mb-4">
-                <h2 className="text-xl font-semibold mb-2">Hostel Information</h2>
-                <p>Caution Deposit: ${sampleHostelData.cautionDeposit}</p>
-                <p>Wi-Fi Availability: {sampleHostelData.wifiAvailability ? 'Available' : 'Not Available'}</p>
-                <p>Water Filter Availability: {sampleHostelData.waterFilterAvailability ? 'Available' : 'Not Available'}</p>
-                <p>Hostel Type: {sampleHostelData.hostelType}</p>
-                <p>Current Bill Payment: {sampleHostelData.currentBillPayment}</p>
-                <p>Water Bill Payment: {sampleHostelData.waterBillPayment}</p>
-                <p>Night Curfew Time: {sampleHostelData.nightCurfewTime}</p>
-                <p>Cleaning Frequency: {sampleHostelData.cleaningFrequency}</p>
+                <h2 className="text-xl font-semibold text-blue-500 mb-2">Hostel Information</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <RiHotelLine className="inline-block mr-2" />
+                        <span>Hostel Type: {sampleHostelData.hostelType}</span>
+                    </div>
+                    <div>
+                        <MdPayment className="inline-block mr-2" />
+                        <span>Caution Deposit: ₹{sampleHostelData.cautionDeposit}</span>
+                    </div>
+                    <div>
+                        <FiClock className="inline-block mr-2" />
+                        <span>Night Curfew Time: {sampleHostelData.nightCurfewTime}</span>
+                    </div>
+                    <div>
+                        <FiWifi className="inline-block mr-2" />
+                        <span>Wi-Fi Availability: {sampleHostelData.wifiAvailability ? 'Available' : 'Not Available'}</span>
+                    </div>
+                    <div>
+                        <FiDroplet className="inline-block mr-2" />
+                        <span>Water Filter Availability: {sampleHostelData.waterFilterAvailability ? 'Available' : 'Not Available'}</span>
+                    </div>
+                    <div>
+                        <MdElectricalServices className="inline-block mr-2" />
+                        <span>Current Bill Payment: {sampleHostelData.currentBillPayment}</span>
+                    </div>
+                    <div>
+                        <FiDroplet className="inline-block mr-2" />
+                        <span>Water Bill Payment: {sampleHostelData.waterBillPayment}</span>
+                    </div>
+                    <div>
+                        <MdCleaningServices className="inline-block mr-2" />
+                        <span>Cleaning Frequency: {sampleHostelData.cleaningFrequency}</span>
+                    </div>
+                    <div>
+                        <MdOutlineLocalParking className="inline-block mr-2" />
+                        <span>Parking Facility : Available</span>
+                    </div>
+                </div>
             </div>
 
             {/* Contact Details */}
             <div className="mb-4">
-                <h2 className="text-xl font-semibold mb-2">Contact Details</h2>
-                <p>Email: {sampleHostelData.contact.email}</p>
-                <p>Phone: {sampleHostelData.contact.phone}</p>
+                <h2 className="text-xl font-semibold text-blue-500 mb-2">Contact Details</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <FiPhone className="inline-block mr-2" />
+                        <span>Phone: {sampleHostelData.contact.phone}</span>
+                    </div>
+                    <div>
+                        <FiMail className="inline-block mr-2" />
+                        <span>Email: {sampleHostelData.contact.email}</span>
+                    </div>
+                </div>
             </div>
+
 
             {/* Map */}
             <div className="mb-4">
-                <h2 className="text-xl font-semibold mb-2">Hostel Location</h2>
+                <h2 className="text-xl text-blue-500 font-semibold mb-2">Hostel Location</h2>
                 <iframe
                     className='responsive-map-container'
                     src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15714.666480511258!2d76.3300326!3d10.0443446!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcb4551c2a9a4b718!2sUsman&#39;s%20Hostel!5e0!3m2!1sen!2sin!4v1666918025290!5m2!1sen!2sin"
                     title="Hostel Location"
                     width="100%"
                     height="400"
-                    style={{ border: "0", width: "100%", marginBottom: "0" }}
-                    allowfullscreen
+                    style={{ border: '0', borderRadius: '8px' }}
+                    allowFullScreen={true}
                     loading="eager"
-                    referrerpolicy="no-referrer-when-downgrade">
+                    referrerPolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
         </div>

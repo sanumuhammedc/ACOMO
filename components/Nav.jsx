@@ -64,7 +64,7 @@ const Nav = () => {
                   key={provider.name}
                   onClick={() => {
                     signIn(provider.id, {
-                      callbackUrl: `${window.location.href}/hostel-add`,
+                      callbackUrl: '/hostel-add',
                     });
                   }}
                   className='black_btn'
