@@ -2,23 +2,24 @@
 import { useState } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 
-const AddHostelForm = ({ onAddHostel }) => {
+const AddHostel = ({ onAddHostel }) => {
     const initialFormData = {
         name: '',
         location: '',
-        contactPhone: [''],
-        roomTypes: [],
         images: [],
-        locationMapUrl: '',
-        wifiAvailability: false,
-        waterFilterAvailability: false,
+        description: '',
+        roomTypes: [{ type: '', price: '', description: '', cautionDeposit: ''}],
         hostelType: '',
         cautionDeposit: 0,
-        currentBillPayment: '',
-        waterBillPayment: '',
-        nightCurfewTime: '',
-        cleaningFrequency: '',
-        parkingFacility: false,
+        nightEntryTime: '',
+        wifi: false,
+        waterFilter: false,
+        currentBill: false,
+        waterBill: false,
+        roomCleaning: false,
+        parking: false,
+        phone: [''],
+        locationUrl: '',
     };
 
     const [formData, setFormData] = useState(initialFormData);
@@ -34,25 +35,25 @@ const AddHostelForm = ({ onAddHostel }) => {
     const handleAddPhoneNumber = () => {
         setFormData({
             ...formData,
-            contactPhone: [...formData.contactPhone, ''],
+            phone: [...formData.phone, ''],
         });
     };
 
 
     const handlePhoneNumberChange = (index, value) => {
-        const updatedPhoneNumbers = [...formData.contactPhone];
+        const updatedPhoneNumbers = [...formData.phone];
         updatedPhoneNumbers[index] = value;
         setFormData({
             ...formData,
-            contactPhone: updatedPhoneNumbers,
+            phone: updatedPhoneNumbers,
         });
     };
 
     const handleRemovePhoneNumber = (index) => {
-        const updatedPhoneNumbers = formData.contactPhone.filter((_, i) => i !== index);
+        const updatedPhoneNumbers = formData.phone.filter((_, i) => i !== index);
         setFormData({
             ...formData,
-            contactPhone: updatedPhoneNumbers,
+            phone: updatedPhoneNumbers,
         });
     };
 
@@ -102,7 +103,7 @@ const AddHostelForm = ({ onAddHostel }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="bg-white rounded shadow-md p-6">
             <div className="mb-4">
                 <label className="block mb-2 font-semibold text-blue-500" htmlFor="name">
                     Hostel Name
@@ -139,9 +140,9 @@ const AddHostelForm = ({ onAddHostel }) => {
                 </label>
                 <input
                     type="text"
-                    id="locationMapUrl"
-                    name="locationMapUrl"
-                    value={formData.locationMapUrl}
+                    id="locationUrl"
+                    name="locationUrl"
+                    value={formData.locationUrl}
                     onChange={handleInputChange}
                     className="w-full p-2 border rounded"
                     required
@@ -150,17 +151,17 @@ const AddHostelForm = ({ onAddHostel }) => {
 
             <div className="mb-4">
                 <label className="block mb-2 font-semibold text-blue-500">Contact Numbers</label>
-                {formData.contactPhone.map((phoneNumber, index) => (
+                {formData.phone.map((phoneNumber, index) => (
                     <div key={index} className="flex">
                         <input
                             type="tel"
-                            name={`contactPhone[${index}]`}
+                            name={`phone[${index}]`}
                             value={phoneNumber}
                             onChange={(e) => handlePhoneNumberChange(index, e.target.value)}
                             className="w-full p-2 border rounded mr-2 mb-2"
                             required
                         />
-                        {formData.contactPhone.length > 1 && (
+                        {formData.phone.length > 1 && (
                             <button
                                 type="button"
                                 onClick={() => handleRemovePhoneNumber(index)}
@@ -171,14 +172,18 @@ const AddHostelForm = ({ onAddHostel }) => {
                         )}
                     </div>
                 ))}
-                <button
-                    type="button"
-                    onClick={handleAddPhoneNumber}
-                    className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                >
-                    Add Phone Number
-                </button>
+                {formData.phone.length < 4 && formData.phone.every((phoneNumber) => phoneNumber !== '') && (
+                    <button
+                        type="button"
+                        onClick={handleAddPhoneNumber}
+                        className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    >
+                        Add Phone Number
+                    </button>
+                )}
             </div>
+
+
 
 
 
@@ -219,14 +224,14 @@ const AddHostelForm = ({ onAddHostel }) => {
 
             {/* Night Entry Time */}
             <div className="mb-4">
-                <label className="block mb-2 font-semibold text-blue-500" htmlFor="nightCurfewTime">
+                <label className="block mb-2 font-semibold text-blue-500" htmlFor="nightEntryTime">
                     Night Entry Time
                 </label>
                 <input
                     type="time"
-                    id="nightCurfewTime"
-                    name="nightCurfewTime"
-                    value={formData.nightCurfewTime}
+                    id="nightEntryTime"
+                    name="nightEntryTime"
+                    value={formData.nightEntryTime}
                     onChange={handleInputChange}
                     className="w-full p-2 border rounded"
                     required
@@ -239,8 +244,8 @@ const AddHostelForm = ({ onAddHostel }) => {
                 <label className="block mb-2 font-semibold text-blue-500">
                     <input
                         type="checkbox"
-                        name="wifiAvailability"
-                        checked={formData.wifiAvailability}
+                        name="wifi"
+                        checked={formData.wifi}
                         onChange={handleInputChange}
                     />
                     wifi Available
@@ -252,8 +257,8 @@ const AddHostelForm = ({ onAddHostel }) => {
                 <label className="block mb-2 font-semibold text-blue-500">
                     <input
                         type="checkbox"
-                        name="waterFilterAvailability"
-                        checked={formData.waterFilterAvailability}
+                        name="waterFilter"
+                        checked={formData.waterFilter}
                         onChange={handleInputChange}
                     />
                     Water Filter Available
@@ -304,8 +309,8 @@ const AddHostelForm = ({ onAddHostel }) => {
                 <label className="block mb-2 font-semibold text-blue-500">
                     <input
                         type="checkbox"
-                        name="parkingFacility"
-                        checked={formData.parkingFacility}
+                        name="parking"
+                        checked={formData.parking}
                         onChange={handleInputChange}
                     />
                     Parking Facility Available
@@ -359,23 +364,75 @@ const AddHostelForm = ({ onAddHostel }) => {
                                 required
                             />
                         </div>
-                        <button
-                            type="button"
-                            onClick={() => handleRemoveRoomType(index)}
-                            className="col-span-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                        >
-                            Remove Room Type
-                        </button>
+                        {formData.roomTypes.length > 1 && (
+                            <button
+                                type="button"
+                                onClick={() => handleRemoveRoomType(index)}
+                                className="col-span-2 flex items-center justify-center px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                            >
+                                <FiTrash2 className="mr-2" />
+                                Remove Room Type
+                            </button>
+                        )}
                     </div>
                 ))}
-                <button
-                    type="button"
-                    onClick={handleAddRoomType}
-                    className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                >
-                    Add Room Type
-                </button>
+                {formData.roomTypes.length === 0 && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label htmlFor={`roomType-0`} className="block mb-2">
+                                Type
+                            </label>
+                            <input
+                                type="text"
+                                id={`roomType-0`}
+                                name={`roomTypes[0].type`}
+                                value={formData.roomTypes[0].type}
+                                onChange={(e) => handleRoomTypeChange(0, 'type', e.target.value)}
+                                className="w-full p-2 border rounded"
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor={`roomPrice-0`} className="block mb-2">
+                                Price
+                            </label>
+                            <input
+                                type="number"
+                                id={`roomPrice-0`}
+                                name={`roomTypes[0].price`}
+                                value={formData.roomTypes[0].price}
+                                onChange={(e) => handleRoomTypeChange(0, 'price', parseFloat(e.target.value))}
+                                className="w-full p-2 border rounded"
+                                required
+                            />
+                        </div>
+                        <div className="col-span-2">
+                            <label htmlFor={`roomDescription-0`} className="block mb-2">
+                                Description
+                            </label>
+                            <input
+                                type="text"
+                                id={`roomDescription-0`}
+                                name={`roomTypes[0].description`}
+                                value={formData.roomTypes[0].description}
+                                onChange={(e) => handleRoomTypeChange(0, 'description', e.target.value)}
+                                className="w-full p-2 border rounded"
+                                required
+                            />
+                        </div>
+                    </div>
+                )}
+                {formData.roomTypes.length < 4 && formData.roomTypes.every((roomType) => roomType.type !== '' && roomType.price !== '' && roomType.description !== '') && (
+                    <button
+                        type="button"
+                        onClick={handleAddRoomType}
+                        className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    >
+                        Add Room Type
+                    </button>
+                )}
             </div>
+
 
 
             {/* Image Gallery */}
@@ -413,4 +470,4 @@ const AddHostelForm = ({ onAddHostel }) => {
     );
 };
 
-export default AddHostelForm;
+export default AddHostel;

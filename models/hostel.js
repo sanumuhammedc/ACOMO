@@ -4,30 +4,39 @@ const HostelSchema = new Schema({
   creator: {
     type: Schema.Types.ObjectId,
     ref: 'User',
+    required: [true, 'Please provide a creator for this hostel'],
   },
   name: {
     type: String,
     required: [true, 'Please provide a name for this hostel'],
-    maxlength: [50, 'Name cannot be more than 50 characters'],
+    length: [50, 'Name cannot be more than 50 characters'],
   },
   description: {
     type: String,
     required: [true, 'Please provide a description for this hostel'],
-    maxlength: [500, 'Description cannot be more than 500 characters'],
+    length: [500, 'Description cannot be more than 500 characters'],
   },
   location: {
     type: String,
     required: [true, 'Please provide a location for this hostel'],
-    maxlength: [150, 'Location cannot be more than 150 characters'],
+    length: [150, 'Location cannot be more than 150 characters'],
   },
-  contactPhone: {
-    type: Number,
-    required: [true, 'Please provide a contact number for this hostel'],
-    maxlength: [10, 'Contact number cannot be more than 10 characters'],
+  phone: {
+    type: [String], // Declare phone as an array of strings
+    required: [true, 'Please provide a phone number for this hostel'],
+    validate: {
+      validator: (phoneNumbers) => phoneNumbers.every(phone => phone.length === 10),
+      message: 'All phone numbers must be 10 characters long',
+    },
   },
-  roomTypes:{
-    type:[
-      {type: String, price: Number, description: String}
+  roomTypes: {
+    type: [
+      {
+        type: { type: String, required: true },
+        price: { type: String, required: true },
+        cautionDeposit: { type: String, required: true },
+        description: { type: String, required: true },
+      }
     ],
     required: [true, 'Please provide at least one room type for this hostel'],
   },
@@ -35,15 +44,15 @@ const HostelSchema = new Schema({
     type: [String],
     required: [true, 'Please provide at least one image for this hostel'],
   },
-  locationMapUrl: {
+  locationUrl: {
     type: String,
     required: [true, 'Please provide a location map url for this hostel'],
   },
-  wifiAvailability: {
+  wifi: {
     type: Boolean,
     default: false,
   },
-  waterFilterAvailability: {
+  waterFilter: {
     type: Boolean,
     default: false,
   },
@@ -51,15 +60,11 @@ const HostelSchema = new Schema({
     type: String,
     required: [true, 'Please provide a hostel type for this hostel'],
   },
-  cautionDeposit: {
-    type: Number,
-    required: [true, 'Please provide a caution deposit for this hostel'],
-  },
-  currentBillPayment: {
+  currentBill: {
     type: Boolean,
     default: false,
   },
-  waterBillPayment: {
+  waterBill: {
     type: Boolean,
     default: false,
   },
@@ -70,7 +75,7 @@ const HostelSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  parkingFacility: {
+  parking: {
     type: Boolean,
     default: false,
   },
