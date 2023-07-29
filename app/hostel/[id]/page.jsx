@@ -48,19 +48,29 @@ const HostelDetailPage = ({ params }) => {
         return formattedTime;
     }
 
+    function truncateLocation(location, maxLength) {
+        if (location.length > maxLength) {
+          return location.slice(0, maxLength) + '...';
+        }
+        return location;
+      }
+
 
     return (
         <>
             {loading ? (<Image style={{ width: "auto", height: "auto" }} alt='Loading...' width="100" height="100" src="/assets/icons/loader.svg" className="flex justify-center items-center h-screen" />) : (
                 <div>
                     <h1 className="text-3xl font-semibold text-blue-500 mb-2 capitalize">{hostelData.name}</h1>
-                    <p className="text-gray-600 mb-4 flex items-center"> <FiMapPin className='mr-1' /> {hostelData.location}</p>
+                    <div className='flex items-center mb-2'>
+                        <FiMapPin className='w-6 h-7 text-blue-500 mr-1 self-start' />
+                        <p className="text-gray-600">{hostelData.location}</p>
+                    </div>
 
                     {/* Image Gallery */}
                     <div className="mb-4">
                         <Carousel showThumbs={false} showStatus={false} infiniteLoop={true} autoPlay dynamicHeight={true}>
                             {hostelData.images.length > 0 ? hostelData.images.map((imageUrl, index) => (
-                                <div key={index}>
+                                <div className='h-40' key={index}>
                                     <img
                                         src={imageUrl}
                                         alt={`Hostel Image ${index + 1}`}
@@ -69,7 +79,7 @@ const HostelDetailPage = ({ params }) => {
                                     />
                                 </div>
                             )) : (
-                                <div>
+                                <div className='h-40'>
                                     <img src="/assets/images/notfound.jpeg" alt="Hostel Image" className="w-full h-full object-cover" style={{ maxHeight: '400px' }} />
                                 </div>
                             )}
@@ -167,7 +177,7 @@ const HostelDetailPage = ({ params }) => {
                         <div className="flex justify-between align-center rounded-lg overflow-hidden shadow-lg bg-white p-8">
                             <div className="flex items-center">
                                 <FiMapPin className="w-5 h-5 text-blue-500 mr-2" />
-                                <span className="text-gray-700">{hostelData.location}</span>
+                                <span className="text-gray-700">{truncateLocation(hostelData.location, 25)}</span>
                             </div>
                             <div className="flex justify-end">
                                 <a

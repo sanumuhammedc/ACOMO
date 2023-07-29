@@ -234,6 +234,7 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
                 <option value="">Select Hostel Type</option>
                 <option value="Mens">Men's Hostel</option>
                 <option value="Women/Ladies">Women's Hostel</option>
+                <option value="Mens & women">Mens & women</option>
                 <option value="Family">Family Hostel</option>
                 <option value="Unavailable">Other</option>
               </select>

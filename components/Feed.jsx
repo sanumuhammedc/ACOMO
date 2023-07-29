@@ -5,7 +5,7 @@ import HostelCard from "./HostelCard";
 
 const HostelCardList = ({ data }) => {
   return (
-    <div className='mt-16 flex justify-around items-center flex-wrap mb-6'>
+    <div className='mt-16 prompt_layout'>
       {data.map((hostel) => (
         <HostelCard
           key={hostel._id}
@@ -73,7 +73,6 @@ const Feed = () => {
         />
       </form>
 
-      {/* All Prompts */}
       {searchText ? (
         <HostelCardList
           data={searchedResults}
