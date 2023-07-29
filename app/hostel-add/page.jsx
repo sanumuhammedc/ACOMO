@@ -77,21 +77,18 @@ const AddHostel = () => {
   }
 
   if (status === "unauthenticated") {
-    return (providers &&
-      Object.values(providers).map((provider) => (
-        <button
-          type='button'
-          key={provider.name}
-          onClick={() => {
-            signIn(provider.id, {
-              callbackUrl: '/hostel-add',
-            });
-          }}
-          className='black_btn'
-        >
-          Add Hostel
-        </button>
-      )))
+    {
+      providers &&
+        Object.values(providers).map((provider) => (
+
+
+          signIn(provider.id, {
+            callbackUrl: '/hostel-add',
+          })
+
+        ))
+    }
+    return null;
   }
 
 
