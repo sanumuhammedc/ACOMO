@@ -5,30 +5,11 @@ import { MdOutlineLocalParking } from 'react-icons/md';
 
 const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
 
-
-  const formatTimeToAmPm = (timeString) => {
-    const [hours, minutes] = timeString.split(':');
-    let period = 'AM';
-    let formattedHours = parseInt(hours, 10);
-
-    if (formattedHours >= 12) {
-      period = 'PM';
-      formattedHours -= 12;
-    }
-
-    if (formattedHours === 0) {
-      formattedHours = 12;
-    }
-
-    return `${formattedHours}:${minutes} ${period}`;
-  };
-
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setHostel((prevData) => ({
       ...prevData,
       [name]: type === 'checkbox' ? checked : value,
-      [name]: name === 'nightEntryTime' ? formatTimeToAmPm(value) : value,
     }));
   };
 
@@ -88,9 +69,10 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
     });
   };
 
+  const maxImages = 3;
+
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    const maxImages = 4;
 
     if (files.length + hostel.images.length > maxImages) {
       alert(`You can select a maximum of ${maxImages} images.`);
@@ -131,17 +113,17 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
         <span className='blue_gradient'>{type} Hostel</span>
       </h1>
       <p className='desc text-left max-w-md'>
-        {type} and help others to find the best hostel for them.
+        {type} hostels and help others to find the best accommodation for them.
       </p>
 
       <form
         onSubmit={handleSubmit}
         className='mt-10 w-full max-w-3xl flex flex-col gap-7 p-6 rounded-lg border bg-white mb-4'
       >
-        <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between">
-          <div className="w-full md:w-1/2 md:pr-3">
-            <label className="block mb-2 font-semibold text-blue-500" htmlFor="name">
-              Hostel Name
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div className="mb-4 w-full md:w-1/2 md:pr-3">
+            <label className="block mb-2 font-semibold" htmlFor="name">
+              Hostel Name <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -153,9 +135,9 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
               required
             />
           </div>
-          <div className="w-full md:w-1/2 md:pl-3">
-            <label className="block mb-2 font-semibold text-blue-500" htmlFor="location">
-              Hostel Location
+          <div className="mb-4 w-full md:w-1/2 md:pl-3">
+            <label className="block mb-2 font-semibold" htmlFor="location">
+              Hostel Location <span className="text-red-500">*</span> <span className="text-gray-400 text-sm">( Address or City )</span>
             </label>
             <input
               type="text"
@@ -170,8 +152,8 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
         </div>
 
         <div className="mb-4">
-          <label className="block mb-2 font-semibold text-blue-500" htmlFor="description">
-            Hostel Description
+          <label className="block mb-2 font-semibold" htmlFor="description">
+            Hostel Description <span className="text-red-500">*</span> <span className="text-gray-400 text-sm">( Your views regarding hostel )</span>
           </label>
           <textarea
             id="description"
@@ -184,10 +166,10 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
         </div>
 
 
-        <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between">
-          <div className="w-full md:w-1/2 md:pr-3">
-            <label className="block mb-2 font-semibold text-blue-500" htmlFor="locationUrl">
-              Location Link
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div className="mb-4 w-full md:w-1/2 md:pr-3">
+            <label className="block mb-2 font-semibold" htmlFor="locationUrl">
+              Location Link <span className="text-red-500">*</span> <span className="text-gray-400 text-sm">( Map url )</span>
             </label>
             <input
               type="text"
@@ -199,8 +181,8 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
               required
             />
           </div>
-          <div className="w-full md:w-1/2 md:pl-3">
-            <label className="block mb-2 font-semibold text-blue-500">Contact Numbers</label>
+          <div className="mb-4 w-full md:w-1/2 md:pl-3">
+            <label className="block mb-2 font-semibold">Contact Numbers <span className="text-red-500">*</span> <span className="text-gray-400 text-sm">( Add upto 4 numbers )</span></label>
             {hostel.phone.map((phoneNumber, index) => (
               <div key={index} className="flex">
                 <input
@@ -234,11 +216,11 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
           </div>
         </div>
 
-        <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           {/* Hostel Type */}
-          <div className="md:w-1/2 md:mr-4">
-            <label className="block mb-2 font-semibold text-blue-500" htmlFor="hostelType">
-              Hostel Type
+          <div className="mb-4 md:w-1/2 md:mr-4">
+            <label className="block mb-2 font-semibold" htmlFor="hostelType">
+              Hostel Type <span className="text-red-500">*</span>
             </label>
             <div className="relative">
               <select
@@ -270,9 +252,9 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
           </div>
 
           {/* Night Entry Time */}
-          <div className="md:w-1/2">
-            <label className="block mb-2 font-semibold text-blue-500" htmlFor="nightEntryTime">
-              Night Entry Time
+          <div className="mb-4 md:w-1/2">
+            <label className="block mb-2 font-semibold" htmlFor="nightEntryTime">
+              Night Entry Time <span className="text-gray-400 text-sm">( If any )</span>
             </label>
             <input
               type="time"
@@ -281,15 +263,13 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
               value={hostel.nightEntryTime}
               onChange={handleInputChange}
               className="w-full p-2 border rounded"
-              required
             />
           </div>
         </div>
 
-        {/* Water Filter Availability */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Water Filter Availability */}
-          <div className="flex items-center">
+          {/* wifi Availability */}
+          <div className="mb-4 flex items-center">
             <FiWifi className="w-5 h-5 text-blue-500 mr-2" />
             <input
               id="wifi"
@@ -299,10 +279,10 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
               onChange={handleInputChange}
               className="w-4 h-4 border rounded text-blue-500 focus:ring-2 focus:ring-blue-500"
             />
-            <label htmlFor="wifi" className="ml-2 text-blue-500 font-medium">Wifi Available</label>
+            <label htmlFor="wifi" className="ml-2 font-medium">Wifi Available</label>
           </div>
 
-          <div className="flex items-center">
+          <div className="mb-4 flex items-center">
             <FiDroplet className="w-5 h-5 text-blue-500 mr-2" />
             <input
               id="waterFilter"
@@ -312,11 +292,11 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
               onChange={handleInputChange}
               className="w-4 h-4 border rounded text-blue-500 focus:ring-2 focus:ring-blue-500"
             />
-            <label htmlFor="waterFilter" className="ml-2 text-blue-500 font-medium">Water Filter Available</label>
+            <label htmlFor="waterFilter" className="ml-2 font-medium">Water Filter Available</label>
           </div>
 
           {/* Current Bill Extra */}
-          <div className="flex items-center">
+          <div className="mb-4 flex items-center">
             <FiDollarSign className="w-5 h-5 text-blue-500 mr-2" />
             <input
               id="currentBill"
@@ -326,11 +306,11 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
               onChange={handleInputChange}
               className="w-4 h-4 border rounded text-blue-500 focus:ring-2 focus:ring-blue-500"
             />
-            <label htmlFor="currentBill" className="ml-2 text-blue-500 font-medium">Current Bill Extra</label>
+            <label htmlFor="currentBill" className="ml-2 font-medium">Current Bill Extra From Rent</label>
           </div>
 
           {/* Water Bill Extra */}
-          <div className="flex items-center">
+          <div className="mb-4 flex items-center">
             <FiDollarSign className="w-5 h-5 text-blue-500 mr-2" />
             <input
               id="waterBill"
@@ -340,11 +320,11 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
               onChange={handleInputChange}
               className="w-4 h-4 border rounded text-blue-500 focus:ring-2 focus:ring-blue-500"
             />
-            <label htmlFor="waterBill" className="ml-2 text-blue-500 font-medium">Water Bill Extra</label>
+            <label htmlFor="waterBill" className="ml-2 font-medium">Water Bill Extra From Rent</label>
           </div>
 
           {/* Cleaning Availability */}
-          <div className="flex items-center">
+          <div className="mb-4 flex items-center">
             <FiCheckCircle className="w-5 h-5 text-blue-500 mr-2" />
             <input
               id="roomCleaning"
@@ -354,11 +334,11 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
               onChange={handleInputChange}
               className="w-4 h-4 border rounded text-blue-500 focus:ring-2 focus:ring-blue-500"
             />
-            <label htmlFor="roomCleaning" className="ml-2 text-blue-500 font-medium">Provide Room Cleaning</label>
+            <label htmlFor="roomCleaning" className="ml-2 font-medium">Provide Room Cleaning</label>
           </div>
 
           {/* Parking Facility */}
-          <div className="flex items-center">
+          <div className="mb-4 flex items-center">
             <MdOutlineLocalParking className="w-5 h-5 text-blue-500 mr-2" />
             <input
               id="parking"
@@ -368,19 +348,19 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
               onChange={handleInputChange}
               className="w-4 h-4 border rounded text-blue-500 focus:ring-2 focus:ring-blue-500"
             />
-            <label htmlFor="parking" className="ml-2 text-blue-500 font-medium">Parking Facility Available</label>
+            <label htmlFor="parking" className="ml-2 font-medium">Parking Facility Available</label>
           </div>
         </div>
 
 
         {/* Room Types */}
         <div className="mb-4">
-          <label className="block mb-2 font-semibold text-blue-500">Room Types</label>
+          <label className="block mb-2 font-semibold">Room Types <span className="text-red-500">*</span> <span className="text-gray-400 text-sm">( Details of rooms available )</span></label>
           {hostel.roomTypes.map((roomType, index) => (
-            <div key={index} className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="md:col-span-3">
-                <label htmlFor={`roomType-${index}`} className="block mb-2">
-                  Type
+            <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+              <div className="md:col-span-2">
+                <label htmlFor={`roomType-${index}`} className="block mb-2 text-blue-500">
+                  Type Of Room <span className="text-red-500">*</span> <span className="text-gray-400 text-sm">( Single, double, etc. )</span>
                 </label>
                 <input
                   type="text"
@@ -388,13 +368,13 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
                   name={`roomTypes[${index}].type`}
                   value={roomType.type}
                   onChange={(e) => handleRoomTypeChange(index, 'type', e.target.value)}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
                   required
                 />
               </div>
-              <div>
-                <label htmlFor={`roomPrice-${index}`} className="block mb-2">
-                  Price
+              <div className="md:col-span-1">
+                <label htmlFor={`roomPrice-${index}`} className="block mb-2 text-blue-500">
+                  Rent Per Month For One Person <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="number"
@@ -402,43 +382,43 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
                   name={`roomTypes[${index}].price`}
                   value={roomType.price}
                   onChange={(e) => handleRoomTypeChange(index, 'price', e.target.value)}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
                   required
                 />
               </div>
-              <div>
-                <label htmlFor={`roomCautionDeposit-${index}`} className="block mb-2">
-                  Caution Deposit
+              <div className="md:col-span-1">
+                <label htmlFor={`roomCautionDeposit-${index}`} className="block mb-2 text-blue-500">
+                  Caution Deposit For One Person <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="number"
                   id={`roomCautionDeposit-${index}`}
                   name={`roomTypes[${index}].cautionDeposit`}
-                  value={roomType.cautionDeposit || ''} // Display an empty string if cautionDeposit is not defined
+                  value={roomType.cautionDeposit || ''}
                   onChange={(e) => handleRoomTypeChange(index, 'cautionDeposit', e.target.value)}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
                   required
                 />
               </div>
-              <div>
-                <label htmlFor={`roomDescription-${index}`} className="block mb-2">
-                  Description
+              <div className="md:col-span-2">
+                <label htmlFor={`roomDescription-${index}`} className="block mb-2 text-blue-500">
+                  Description <span className="text-red-500">*</span><br />
+                  <span className="text-gray-400 text-sm"> (Basic Details About The Room Type)</span>
                 </label>
-                <input
-                  type="text"
+                <textarea
                   id={`roomDescription-${index}`}
                   name={`roomTypes[${index}].description`}
                   value={roomType.description}
                   onChange={(e) => handleRoomTypeChange(index, 'description', e.target.value)}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
                   required
                 />
               </div>
-              {hostel.roomTypes.length > 1 && (
+              {index > 0 && (
                 <button
                   type="button"
                   onClick={() => handleRemoveRoomType(index)}
-                  className="col-span-3 flex items-center justify-center px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                  className="col-span-2 flex items-center justify-center px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 mb-4"
                 >
                   <FiTrash2 className="mr-2" />
                   Remove Room Type
@@ -446,71 +426,11 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
               )}
             </div>
           ))}
-          {hostel.roomTypes.length === 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="md:col-span-3">
-                <label htmlFor={`roomType-0`} className="block mb-2">
-                  Type
-                </label>
-                <input
-                  type="text"
-                  id={`roomType-0`}
-                  name={`roomTypes[0].type`}
-                  value={hostel.roomTypes[0].type || ''} // Display an empty string if type is not defined
-                  onChange={(e) => handleRoomTypeChange(0, 'type', e.target.value)}
-                  className="w-full p-2 border rounded"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor={`roomPrice-0`} className="block mb-2">
-                  Price
-                </label>
-                <input
-                  type="number"
-                  id={`roomPrice-0`}
-                  name={`roomTypes[0].price`}
-                  value={hostel.roomTypes[0].price || ''} // Display an empty string if price is not defined
-                  onChange={(e) => handleRoomTypeChange(0, 'price', e.target.value)}
-                  className="w-full p-2 border rounded"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor={`roomCautionDeposit-0`} className="block mb-2">
-                  Caution Deposit
-                </label>
-                <input
-                  type="number"
-                  id={`roomCautionDeposit-0`}
-                  name={`roomTypes[0].cautionDeposit`}
-                  value={hostel.roomTypes[0].cautionDeposit || ''} // Display an empty string if cautionDeposit is not defined
-                  onChange={(e) => handleRoomTypeChange(0, 'cautionDeposit', e.target.value)}
-                  className="w-full p-2 border rounded"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor={`roomDescription-0`} className="block mb-2">
-                  Description
-                </label>
-                <input
-                  type="text"
-                  id={`roomDescription-0`}
-                  name={`roomTypes[0].description`}
-                  value={hostel.roomTypes[0].description || ''} // Display an empty string if description is not defined
-                  onChange={(e) => handleRoomTypeChange(0, 'description', e.target.value)}
-                  className="w-full p-2 border rounded"
-                  required
-                />
-              </div>
-            </div>
-          )}
           {hostel.roomTypes.length < 8 && hostel.roomTypes.every((roomType) => roomType.type !== '' && roomType.price !== '' && roomType.description !== '' && roomType.cautionDeposit !== '') && (
             <button
               type="button"
               onClick={handleAddRoomType}
-              className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
             >
               Add Room Type
             </button>
@@ -521,7 +441,9 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
 
         {/* Image Gallery */}
         <div className="mb-4">
-          <label className="block mb-2 font-semibold text-blue-500">Image Gallery</label>
+          <label className="block mb-4 font-semibold">
+            Image Upload <span className="text-gray-400 text-sm">( At least 1 and Max 3 Images if available )</span>
+            </label>
           <input
             id="fileInput"
             type="file"
@@ -563,7 +485,7 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
           <button
             type='submit'
             disabled={submitting}
-            className='px-5 py-1.5 text-sm bg-blue-600 rounded-full text-white'
+            className='black_btn'
           >
             {submitting ? `${type}ing...` : type}
           </button>

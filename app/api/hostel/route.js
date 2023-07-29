@@ -1,13 +1,14 @@
-import Prompt from "@models/hostel";
+import Hostel from "@models/hostel";
 import { connectToDB } from "@utils/database";
 
 export const GET = async (request) => {
     try {
         await connectToDB()
 
-        const prompts = await Prompt.find({}).populate('creator')
+        const hostels = await Hostel.find({}).populate('creator')
+        console.log(hostels)
 
-        return new Response(JSON.stringify(prompts), { status: 200 })
+        return new Response(JSON.stringify(hostels), { status: 200 })
     } catch (error) {
         return new Response("Failed to fetch all prompts", { status: 500 })
     }

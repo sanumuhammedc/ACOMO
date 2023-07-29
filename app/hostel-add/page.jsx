@@ -51,7 +51,6 @@ const AddHostel = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setHostel((prevData) => ({ ...prevData, creator: userId }));
-    console.log(hostel);
 
     try {
       const response = await fetch("/api/hostel/new", {
@@ -60,45 +59,48 @@ const AddHostel = () => {
       });
 
       if (response.ok) {
+        alert('Hostel created successfully!');
         router.push("/");
+      } else {
+        alert('Failed to create hostel. Please try again.');
       }
     } catch (error) {
       console.log(error);
+      alert('An error occurred. Please try again later.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   if (status === "loading") {
-    // Render a loading indicator or placeholder while session data is loading
     return <Image src="/assets/icons/loader.svg" alt="loading..." width="100" height="100" />;
   }
 
-  // Check if the user is authenticated, if not, redirect to login page
   if (status === "unauthenticated") {
-    // Redirect to the login page or any other page for authentication
-    {providers &&
-      Object.values(providers).map((provider) => (
+    {
+      providers &&
+        Object.values(providers).map((provider) => (
 
-       
-            signIn(provider.id, {
-              callbackUrl: '/hostel-add',
-            })
-         
-      ))}
+
+          signIn(provider.id, {
+            callbackUrl: '/hostel-add',
+          })
+
+        ))
+    }
     return null;
   }
 
 
 
   return (
-    <Form
-      type='Add'
-      hostel={hostel}
-      setHostel={setHostel}
-      submitting={submitting}
-      handleSubmit={createHostel}
-    />
+      <Form
+        type='Add'
+        hostel={hostel}
+        setHostel={setHostel}
+        submitting={submitting}
+        handleSubmit={createHostel}
+      />
   );
 };
 
