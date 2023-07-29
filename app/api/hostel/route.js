@@ -6,7 +6,6 @@ export const GET = async (request) => {
         await connectToDB()
 
         const hostels = await Hostel.find({}).populate('creator')
-        console.log(hostels)
 
         return new Response(JSON.stringify(hostels), { status: 200 })
     } catch (error) {

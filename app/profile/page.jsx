@@ -10,37 +10,37 @@ const MyProfile = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
-  const [myPosts, setMyPosts] = useState([]);
+  const [myHostels, setMyHostels] = useState([]);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await fetch(`/api/users/${session?.user.id}/posts`);
+    const fetchHostels = async () => {
+      const response = await fetch(`/api/users/${session?.user.id}/hostels`);
       const data = await response.json();
 
-      setMyPosts(data);
+      setMyHostels(data);
     };
 
-    if (session?.user.id) fetchPosts();
+    if (session?.user.id) fetchHostels();
   }, [session?.user.id]);
 
-  const handleEdit = (post) => {
-    router.push(`/update-hostel?id=${post._id}`);
+  const handleEdit = (hostel) => {
+    router.push(`/hostel-update?id=${hostel._id}`);
   };
 
-  const handleDelete = async (post) => {
+  const handleDelete = async (hostel) => {
     const hasConfirmed = confirm(
-      "Are you sure you want to delete this prompt?"
+      "Are you sure you want to delete this Hostel?"
     );
 
     if (hasConfirmed) {
       try {
-        await fetch(`/api/prompt/${post._id.toString()}`, {
+        await fetch(`/api/hostel/${hostel._id.toString()}`, {
           method: "DELETE",
         });
 
-        const filteredPosts = myPosts.filter((item) => item._id !== post._id);
+        const filteredPosts = myHostels.filter((item) => item._id !== hostel._id);
 
-        setMyPosts(filteredPosts);
+        setMyHostels(filteredPosts);
       } catch (error) {
         console.log(error);
       }
@@ -50,8 +50,8 @@ const MyProfile = () => {
   return (
     <Profile
       name='My'
-      desc='Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination'
-      data={myPosts}
+      desc={`Welcome to your profile page. Explore hostels added by you to help others  to find perfect accommodation options.`}
+      data={myHostels}
       handleEdit={handleEdit}
       handleDelete={handleDelete}
     />

@@ -1,22 +1,29 @@
+"use client";
+
+import { useSession } from "next-auth/react";
+import { usePathname, useRouter } from "next/navigation";
 import Image from 'next/image';
 import Link from 'next/link';
+import { FiWifi, FiMapPin } from 'react-icons/fi';
+import { RiHotelLine } from 'react-icons/ri';
 
-const HostelCard = () => {
 
-  const handleEdit = () => {
-    console.log('edit');
-  };
+const HostelCard = ({ hostel, handleEdit, handleDelete }) => {
 
-  const handleDelete = () => {
-    console.log('delete');
-  };
+  const { data: session } = useSession();
+  const pathName = usePathname();
+  const router = useRouter();
+
 
   return (
-    <Link href="/" className='prompt_card'>
-      <div className='flex flex-center'>
+    <div className='prompt_card flex flex-col rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300'
+    >
+      <Link
+      href={`/hostel/${hostel._id}`}>
+      <div className='flex justify-center'>
         <Image
-          src="/assets/images/notfound.jpeg"
-          alt='user_image'
+          src={hostel.images[0] || "/assets/images/notfound.jpeg"}
+          alt='Hostel Image'
           width={500}
           height={500}
           className='w-full h-fit rounded-t-lg'
@@ -24,30 +31,43 @@ const HostelCard = () => {
       </div>
 
       <div className='p-4'>
-        <h3 className='font-satoshi text-gray-900 text-xl font-bold mb-1'>hostel name</h3>
-        <div className='font-satoshi text-sm text-gray-700 flex'>
-          <Image src="/assets/icons/location.svg" width={15} height={15} alt='location' /> 
-          location
+        <h3 className='font-bold text-xl mb-1 capitalize'>{hostel.name}</h3>
+        <div className='text-gray-700 flex items-center'>
+          <FiMapPin className='text-blue-500 mr-2' />
+          {hostel.location}
+        </div>
+
+        <div className='flex flex-start justify-around mt-3'>
+        <div className='flex items-center mr-4'>
+            <FiWifi className='text-blue-500 mr-2' />
+            <span>{hostel.wifi ? 'Wifi Available' : 'No Wifi'}</span>
+          </div>
+          <div className='flex items-center'>
+            <RiHotelLine className='text-blue-500 mr-2' />
+            <span>{hostel.hostelType}</span>
+          </div>
         </div>
       </div>
+      </Link>
 
-      {/* {session?.user.id === post.creator._id && pathName === "/profile" && (
-          <div className='flex-end gap-4 border-t border-gray-100 pt-3 mr-3 mb-2'>
-            <p
-              className='font-inter text-sm blue_gradient cursor-pointer'
-              onClick={handleEdit}
-            >
-              Edit
-            </p>
-            <p
-              className='font-inter text-sm orange_gradient cursor-pointer'
-              onClick={handleDelete}
-            >
-              Delete
-            </p>
-          </div>
-        )} */}
-    </Link>
+      {session?.user.id === hostel.creator._id && pathName === "/profile" && (
+        <div className='flex justify-end justify-around p-4 border-t border-gray-100 pt-3 px-4'>
+          <p
+            className='font-medium text-blue-500 cursor-pointer hover:text-blue-600'
+            onClick={handleEdit}
+          >
+            Edit
+          </p>
+          <p
+            className='font-medium text-orange-500 cursor-pointer hover:text-orange-600'
+            onClick={handleDelete}
+          >
+            Delete
+          </p>
+        </div>
+      )}
+    </div>
+
   );
 };
 

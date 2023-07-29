@@ -1,18 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
-import PromptCard from "./PromptCard";
 import HostelCard from "./HostelCard";
 
-const PromptCardList = ({ data, handleTagClick }) => {
+const HostelCardList = ({ data }) => {
   return (
-    <div className='mt-16 prompt_layout'>
-      {data.map((post) => (
-        <PromptCard
-          key={post._id}
-          post={post}
-          handleTagClick={handleTagClick}
+    <div className='mt-16 flex justify-around items-center flex-wrap mb-6'>
+      {data.map((hostel) => (
+        <HostelCard
+          key={hostel._id}
+          hostel={hostel}
         />
       ))}
     </div>
@@ -20,31 +17,33 @@ const PromptCardList = ({ data, handleTagClick }) => {
 };
 
 const Feed = () => {
-  const [allPosts, setAllPosts] = useState([]);
+  const [allHostels, setAllHostels] = useState([]);
 
   // Search states
   const [searchText, setSearchText] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
 
-  const fetchPosts = async () => {
-    const response = await fetch("/api/prompt");
+  const fetchHostels = async () => {
+    const response = await fetch("/api/hostel");
     const data = await response.json();
 
-    setAllPosts(data);
+    setAllHostels(data);
   };
 
   useEffect(() => {
-    fetchPosts();
+    fetchHostels();
   }, []);
 
-  const filterPrompts = (searchtext) => {
+  const filterHostels = (searchtext) => {
     const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
-    return allPosts.filter(
+    return allHostels.filter(
       (item) =>
-        regex.test(item.creator.username) ||
-        regex.test(item.tag) ||
-        regex.test(item.prompt)
+        regex.test(item.name) ||
+        regex.test(item.hostelType) ||
+        regex.test(item.roomTypes) ||
+        regex.test(item.location) ||
+        regex.test(item.description)
     );
   };
 
@@ -55,17 +54,10 @@ const Feed = () => {
     // debounce method
     setSearchTimeout(
       setTimeout(() => {
-        const searchResult = filterPrompts(e.target.value);
+        const searchResult = filterHostels(e.target.value);
         setSearchedResults(searchResult);
       }, 500)
     );
-  };
-
-  const handleTagClick = (tagName) => {
-    setSearchText(tagName);
-
-    const searchResult = filterPrompts(tagName);
-    setSearchedResults(searchResult);
   };
 
   return (
@@ -83,12 +75,11 @@ const Feed = () => {
 
       {/* All Prompts */}
       {searchText ? (
-        <PromptCardList
+        <HostelCardList
           data={searchedResults}
-          handleTagClick={handleTagClick}
         />
       ) : (
-        <PromptCardList data={allPosts} handleTagClick={handleTagClick} />
+        <HostelCardList data={allHostels} />
       )}
     </section>
   );

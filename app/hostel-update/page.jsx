@@ -4,42 +4,39 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Form from "@components/Form";
+import Image from "next/image";
 
 const UpdateHostel = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const promptId = searchParams.get("id");
+  const hostelId = searchParams.get("id");
 
-  const [post, setPost] = useState({ prompt: "", tag: "", });
+  const [hostel, setHostel] = useState({});
+  const [loading, setLoading] = useState(true);
   const [submitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    const getPromptDetails = async () => {
-      const response = await fetch(`/api/prompt/${promptId}`);
+    const getHostelDetails = async () => {
+      const response = await fetch(`/api/hostel/${hostelId}`);
       const data = await response.json();
 
-      setPost({
-        prompt: data.prompt,
-        tag: data.tag,
-      });
+      setHostel(data);
+      setLoading(false);
     };
 
-    if (promptId) getPromptDetails();
-  }, [promptId]);
+    if (hostelId) getHostelDetails();
+  }, [hostelId]);
 
-  const updatePrompt = async (e) => {
+  const updateData = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    if (!promptId) return alert("Missing PromptId!");
+    if (!hostelId) return alert("Missing hostel Id!");
 
     try {
-      const response = await fetch(`/api/prompt/${promptId}`, {
+      const response = await fetch(`/api/hostel/${hostelId}`, {
         method: "PATCH",
-        body: JSON.stringify({
-          prompt: post.prompt,
-          tag: post.tag,
-        }),
+        body: JSON.stringify(hostel),
       });
 
       if (response.ok) {
@@ -53,13 +50,17 @@ const UpdateHostel = () => {
   };
 
   return (
-    <Form
-      type='Edit'
-      post={post}
-      setPost={setPost}
-      submitting={submitting}
-      handleSubmit={updatePrompt}
-    />
+    <>
+    {loading ? (<Image style={{ width: "auto", height: "auto" }} alt='Loading...' width="100" height="100" src="/assets/icons/loader.svg" className="flex justify-center items-center h-screen" />) : (
+      <Form
+        type='Edit'
+        hostel={hostel}
+        setHostel={setHostel}
+        submitting={submitting}
+        handleSubmit={updateData}
+      />)
+    }
+    </>
   );
 };
 

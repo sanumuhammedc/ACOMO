@@ -232,8 +232,8 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
                 required
               >
                 <option value="">Select Hostel Type</option>
-                <option value="Men">Men's Hostel</option>
-                <option value="Women">Women's Hostel</option>
+                <option value="Mens">Men's Hostel</option>
+                <option value="Women/Ladies">Women's Hostel</option>
                 <option value="Family">Family Hostel</option>
                 <option value="Unavailable">Other</option>
               </select>

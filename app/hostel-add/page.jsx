@@ -73,7 +73,7 @@ const AddHostel = () => {
   };
 
   if (status === "loading") {
-    return <Image src="/assets/icons/loader.svg" alt="loading..." width="100" height="100" />;
+    return <Image className="flex justify-center items-center h-screen" src="/assets/icons/loader.svg" alt="Loading..." width="100" height="100" style={{width: "auto", height: "auto"}} />;
   }
 
   if (status === "unauthenticated") {

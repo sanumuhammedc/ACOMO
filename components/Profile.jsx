@@ -1,4 +1,4 @@
-import PromptCard from "./PromptCard";
+import HostelCard from "./HostelCard";
 
 const Profile = ({ name, desc, data, handleEdit, handleDelete }) => {
   return (
@@ -9,12 +9,12 @@ const Profile = ({ name, desc, data, handleEdit, handleDelete }) => {
       <p className='desc text-left'>{desc}</p>
 
       <div className='mt-10 prompt_layout'>
-        {data.map((post) => (
-          <PromptCard
-            key={post._id}
-            post={post}
-            handleEdit={() => handleEdit && handleEdit(post)}
-            handleDelete={() => handleDelete && handleDelete(post)}
+        {data.map((hostel) => (
+          <HostelCard
+            key={hostel._id}
+            hostel={hostel}
+            handleEdit={() => handleEdit && handleEdit(hostel)}
+            handleDelete={() => handleDelete && handleDelete(hostel)}
           />
         ))}
       </div>
