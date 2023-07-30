@@ -358,7 +358,7 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
         <div className="mb-4">
           <label className="block mb-2 font-semibold">Room Types <span className="text-red-500">*</span> <span className="text-gray-400 text-sm">( Details of rooms available )</span></label>
           {hostel.roomTypes.map((roomType, index) => (
-            <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+            <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
               <div className="md:col-span-2">
                 <label htmlFor={`roomType-${index}`} className="block mb-2 text-blue-500">
                   Type Of Room <span className="text-red-500">*</span> <span className="text-gray-400 text-sm">( Single, double, etc. )</span>
@@ -373,7 +373,7 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
                   required
                 />
               </div>
-              <div className="md:col-span-1">
+              <div className="md:col-span-1 md:flex md:flex-col">
                 <label htmlFor={`roomPrice-${index}`} className="block mb-2 text-blue-500">
                   Rent Per Month For One Person <span className="text-red-500">*</span>
                 </label>
@@ -387,7 +387,7 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
                   required
                 />
               </div>
-              <div className="md:col-span-1">
+              <div className="md:col-span-1 md:flex md:flex-col">
                 <label htmlFor={`roomCautionDeposit-${index}`} className="block mb-2 text-blue-500">
                   Caution Deposit For One Person <span className="text-red-500">*</span>
                 </label>
@@ -419,7 +419,7 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
                 <button
                   type="button"
                   onClick={() => handleRemoveRoomType(index)}
-                  className="col-span-2 flex items-center justify-center px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 mb-4"
+                  className="md:col-span-2 flex items-center justify-center px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 mb-4"
                 >
                   <FiTrash2 className="mr-2" />
                   Remove Room Type
@@ -438,13 +438,11 @@ const Form = ({ type, hostel, setHostel, submitting, handleSubmit }) => {
           )}
         </div>
 
-
-
         {/* Image Gallery */}
         <div className="mb-4">
           <label className="block mb-4 font-semibold">
             Image Upload <span className="text-gray-400 text-sm">( At least 1 and Max 3 Images if available )</span>
-            </label>
+          </label>
           <input
             id="fileInput"
             type="file"
