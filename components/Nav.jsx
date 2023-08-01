@@ -7,7 +7,7 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Nav = () => {
   const { data: session } = useSession();
-  
+
 
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -40,7 +40,7 @@ const Nav = () => {
               Add Hostel
             </Link>
 
-            <button type='button' onClick={()=>{signOut({ callbackUrl: "/"})}} className='outline_btn'>
+            <button type='button' onClick={() => { signOut({ callbackUrl: "/" }) }} className='outline_btn'>
               Sign Out
             </button>
 
@@ -108,7 +108,7 @@ const Nav = () => {
                   type='button'
                   onClick={() => {
                     setToggleDropdown(false);
-                    signOut({ callbackUrl: "/"});
+                    signOut({ callbackUrl: "/" });
                   }}
                   className='mt-5 w-full black_btn'
                 >
@@ -126,7 +126,7 @@ const Nav = () => {
                   key={provider.name}
                   onClick={() => {
                     signIn(provider.id, {
-                      callbackUrl: `${window.location.href}/hostel-add`,
+                      callbackUrl: '/hostel-add',
                     });
                   }}
                   className='black_btn'
