@@ -33,7 +33,7 @@ const Feed = () => {
 
   useEffect(() => {
     fetchHostels();
-  }, []);
+  }, [allHostels]);
 
   const filterHostels = (searchtext) => {
     const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
